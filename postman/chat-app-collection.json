@@ -1,0 +1,506 @@
+{
+	"info": {
+		"_postman_id": "a4bf90e6-0e70-4e1e-a1ab-82c23fd6088d",
+		"name": "chat-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get all users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/user/allUsers",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"allUsers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Milica\",\n    \"lastName\": \"Simeunovic\",\n    \"email\": \"milicfa@gmail.com\",\n    \"password\": \"123456789\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/user",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/user/4c237408-dfdd-11eb-a0be-6c4008c02622",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"4c237408-dfdd-11eb-a0be-6c4008c02622"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibWlsaWNhQGdtYWlsLmNvbSIsInN1YiI6IjRhZmU4OTYwLWNhYmEtMTFlYi05ZTI3LTZjNDAwOGMwMjYyMiIsImlhdCI6MTYyMzY2OTkxOCwiZXhwIjoxNjIzNjY5OTc4fQ.k3tFOQoXGe4YmZWkQKdJcpUDZr7mu9trBXETDIBwB2g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}/user",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Nikolina\",\n    \"lastName\": \"Nikic\",\n    \"email\": \"nikolina@gmail.com\"\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/user/4c237408-dfdd-11eb-a0be-6c4008c02622",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"4c237408-dfdd-11eb-a0be-6c4008c02622"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/user/00810456-cdd2-11eb-872f-6c4008c02622",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"00810456-cdd2-11eb-872f-6c4008c02622"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Get token\", function() {",
+									" var jsonData = pm.response.json();",
+									" pm.environment.set(\"api-token\", jsonData.accessToken);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"milica@gmail.com\",\n    \"password\": \"123456789\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/auth/login",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Chat",
+			"item": [
+				{
+					"name": "Send message",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"forUserId\": \"2d3d65dc-c9f1-11eb-a79f-6c4008c02622\",\n    \"message\": \"test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/chat",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"chat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one message",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/chat/f0d8d9d8-d039-11eb-878b-6c4008c02622",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"chat",
+								"f0d8d9d8-d039-11eb-878b-6c4008c02622"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete message",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/chat/c6f87f14-d012-11eb-9406-6c4008c02622",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"chat",
+								"c6f87f14-d012-11eb-9406-6c4008c02622"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update message",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"message\": \" update test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/chat/f0d8d9d8-d039-11eb-878b-6c4008c02622",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"chat",
+								"f0d8d9d8-d039-11eb-878b-6c4008c02622"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all user chats",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/chat",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"chat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all with user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/chat/all/paginate?id=00810456-cdd2-11eb-872f-6c4008c02622&page=1&limit=1",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"chat",
+								"all",
+								"paginate"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "00810456-cdd2-11eb-872f-6c4008c02622"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update seenOn in messages",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"632e5744-de4d-11eb-aec5-6c4008c02622\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/chat/seen",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"chat",
+								"seen"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

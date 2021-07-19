@@ -1,0 +1,1 @@
+export class UserEmailExistsException extends Error {}
